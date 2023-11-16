@@ -1,0 +1,42 @@
+class Solution{
+    
+
+private:
+
+    char to_char(int n) {
+
+        return '0'+n;
+
+        }
+
+    void dfs(int k, string prev, unordered_set<string>& seen, string& ans) { 
+        for (int i=0; i<k; i++) {
+    
+            string curr= prev + to_char(i);
+    
+                if(seen.find(curr) == seen.end()) {
+                
+                    seen.insert(curr); 
+                    dfs(k, curr.substr(1), seen, ans); 
+                    ans.push_back(to_char(i));
+            }
+        }
+    }
+    
+public:
+    
+    string findString(int n, int k) {
+    
+    string startingNode = string (n-1, '0');
+    
+    string ans;
+    
+    unordered_set<string> seen;
+    
+    dfs(k, startingNode, seen, ans);
+    
+    ans+=startingNode;
+
+    return ans;
+    }
+};
